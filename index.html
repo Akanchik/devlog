@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Developer</title>
+
+<style>
+/* ====== STYLE ====== */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system;
+  background: #0e0e0e;
+  color: #fff;
+}
+
+header {
+  padding: 20px;
+  border-bottom: 1px solid #222;
+}
+
+h1 {
+  margin: 0 0 10px;
+}
+
+nav a {
+  margin-right: 14px;
+  color: #aaa;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #fff;
+}
+
+main {
+  padding: 20px;
+  max-width: 720px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.download {
+  display: inline-block;
+  margin-top: 12px;
+  color: #4da6ff;
+  text-decoration: none;
+}
+
+.back {
+  color: #aaa;
+  cursor: pointer;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Developer</h1>
+  <nav id="menu"></nav>
+</header>
+
+<main id="main">
+  <p style="color:#666">Выберите раздел</p>
+</main>
+
+<script>
+/* ====== CONFIG ====== */
+const CONTENT_FILES = [
+  "about.json",
+  "projects.json",
+  "contact.json"
+];
+
+/* ====== LOAD MENU ====== */
+async function loadMenu() {
+  const menu = document.getElementById("menu");
+
+  for (const file of CONTENT_FILES) {
+    const data = await fetch("content/" + file).then(r => r.json());
+
+    const a = document.createElement("a");
+    a.textContent = data.title;
+    a.onclick = () => openPage(file);
+
+    menu.appendChild(a);
+  }
+}
+
+/* ====== OPEN PAGE ====== */
+async function openPage(file) {
+  const data = await fetch("content/" + file).then(r => r.json());
+  const main = document.getElementById("main");
+
+  main.innerHTML = `
+    <div class="back" onclick="goHome()">← Назад</div>
+    <h2>${data.title}</h2>
+    <p>${data.content.text || ""}</p>
+  `;
+
+  if (data.content.image) {
+    const img = document.createElement("img");
+    img.src = data.content.image;
+    main.appendChild(img);
+  }
+
+  if (data.content.files) {
+    data.content.files.forEach(f => {
+      const a = document.createElement("a");
+      a.href = f.url;
+      a.textContent = f.name;
+      a.className = "download";
+      a.download = "";
+      main.appendChild(a);
+    });
+  }
+}
+
+/* ====== HOME ====== */
+function goHome() {
+  location.reload();
+}
+
+loadMenu();
+</script>
+
+</body>
+</html>
