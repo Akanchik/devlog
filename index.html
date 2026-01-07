@@ -2,201 +2,136 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Developer</title>
+<title>Developer Platform</title>
 
 <style>
 :root {
-  --bg: #0b0d12;
+  --bg: #0b0e14;
   --card: rgba(255,255,255,0.06);
-  --border: rgba(255,255,255,0.12);
+  --border: rgba(255,255,255,0.14);
   --accent: #6ea8ff;
-  --text: #ffffff;
+  --text: #fff;
   --muted: #9aa0aa;
 }
 
-/* ===== RESET ===== */
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-/* ===== BODY ===== */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system;
+  font-family: system-ui;
   background:
-    radial-gradient(1200px 500px at 10% -10%, #1b2a4a 0%, transparent 60%),
-    radial-gradient(1000px 400px at 90% 10%, #2a1b4a 0%, transparent 60%),
+    radial-gradient(800px 300px at 10% -10%, #1b2a4a 0%, transparent 60%),
+    radial-gradient(600px 300px at 90% 0%, #2a1b4a 0%, transparent 60%),
     var(--bg);
   color: var(--text);
-  min-height: 100vh;
 }
 
-/* ===== HEADER ===== */
 header {
   position: sticky;
   top: 0;
-  z-index: 10;
   backdrop-filter: blur(14px);
-  background: rgba(10,10,15,0.6);
+  background: rgba(10,10,15,.6);
   border-bottom: 1px solid var(--border);
+  z-index: 10;
 }
 
 .header-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  padding: 18px 20px;
+  padding: 16px 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-  font-size: 20px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  font-size: 20px;
 }
 
-nav a {
-  margin-left: 18px;
+nav button {
+  background: none;
+  border: none;
   color: var(--muted);
-  text-decoration: none;
-  position: relative;
-  transition: color 0.2s;
+  margin-left: 16px;
+  cursor: pointer;
 }
 
-nav a:hover {
-  color: var(--text);
-}
+nav button:hover { color: var(--text); }
 
-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  transition: width 0.25s;
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-/* ===== MAIN ===== */
 main {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  padding: 40px 20px;
+  padding: 30px 20px;
 }
 
-/* ===== HERO ===== */
-.hero {
-  margin-bottom: 40px;
-  animation: fadeUp 0.6s ease;
-}
-
-.hero h1 {
-  font-size: 42px;
-  margin: 0 0 10px;
-}
-
-.hero p {
-  color: var(--muted);
-  max-width: 600px;
-}
-
-/* ===== GRID ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
   gap: 20px;
 }
 
-/* ===== CARD ===== */
 .card {
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.02)
-  );
+  background: linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
   cursor: pointer;
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s,
-    border-color 0.25s;
-  animation: fadeUp 0.6s ease;
+  transition: .25s;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  border-color: rgba(110,168,255,0.6);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  border-color: var(--accent);
 }
 
-.card h3 {
-  margin: 0 0 8px;
-}
+.card h3 { margin: 0 0 6px; }
+.card p { margin: 0; color: var(--muted); font-size: 14px; }
 
-.card p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-/* ===== PAGE VIEW ===== */
-.page {
-  animation: fadeUp 0.5s ease;
-}
-
-.back {
-  color: var(--muted);
-  cursor: pointer;
-  margin-bottom: 16px;
-  display: inline-block;
-}
-
-.page h2 {
-  font-size: 32px;
-  margin-top: 0;
-}
-
-.page p {
-  line-height: 1.7;
-  color: #d7dbe3;
-}
-
-.page img {
-  max-width: 100%;
-  border-radius: 14px;
-  margin: 20px 0;
+.editor {
+  margin-top: 30px;
   border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  background: var(--card);
 }
 
-.download {
-  display: inline-block;
-  margin-top: 14px;
+.editor h2 { margin-top: 0; }
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #12151d;
+  color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+textarea { min-height: 80px; }
+
+button.action {
   padding: 10px 14px;
-  border-radius: 10px;
-  background: rgba(110,168,255,0.15);
+  background: rgba(110,168,255,.15);
+  border: 1px solid rgba(110,168,255,.4);
   color: var(--accent);
-  text-decoration: none;
-  border: 1px solid rgba(110,168,255,0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 10px;
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.preview {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: #0e1118;
+  border: 1px dashed var(--border);
+}
+
+.preview img {
+  max-width: 100%;
+  border-radius: 12px;
+  margin-top: 10px;
 }
 </style>
 </head>
@@ -205,91 +140,86 @@ main {
 
 <header>
   <div class="header-inner">
-    <div class="logo">Developer</div>
-    <nav id="menu"></nav>
+    <div class="logo">Dev Platform</div>
+    <nav>
+      <button onclick="showHome()">Главная</button>
+      <button onclick="showEditor()">Создать</button>
+      <button onclick="exportJSON()">Экспорт JSON</button>
+    </nav>
   </div>
 </header>
 
-<main id="main">
-  <div class="hero">
-    <h1>Привет 👋</h1>
-    <p>
-      Я разработчик. Здесь — мои проекты, страницы и материалы.
-      Всё управляется через JSON.
-    </p>
-  </div>
-
-  <div class="grid" id="cards"></div>
-</main>
+<main id="main"></main>
 
 <script>
-const CONTENT_FILES = [
-  "about.json",
-  "projects.json",
-  "contact.json"
-];
+let pages = JSON.parse(localStorage.getItem("pages") || "[]");
 
-const main = document.getElementById("main");
-const cards = document.getElementById("cards");
-const menu = document.getElementById("menu");
+function showHome() {
+  main.innerHTML = `<div class="grid"></div>`;
+  const grid = document.querySelector(".grid");
 
-/* ===== LOAD ===== */
-async function loadHome() {
-  cards.innerHTML = "";
-
-  for (const file of CONTENT_FILES) {
-    const data = await fetch("content/" + file).then(r => r.json());
-
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerHTML = `
-      <h3>${data.title}</h3>
-      <p>${data.content.text?.slice(0, 80) || ""}</p>
-    `;
-    card.onclick = () => openPage(file);
-
-    cards.appendChild(card);
-
-    const link = document.createElement("a");
-    link.textContent = data.title;
-    link.onclick = () => openPage(file);
-    menu.appendChild(link);
-  }
+  pages.forEach(p => {
+    const c = document.createElement("div");
+    c.className = "card";
+    c.innerHTML = `<h3>${p.title}</h3><p>${p.text.slice(0,80)}</p>`;
+    c.onclick = () => openPage(p);
+    grid.appendChild(c);
+  });
 }
 
-/* ===== OPEN PAGE ===== */
-async function openPage(file) {
-  const data = await fetch("content/" + file).then(r => r.json());
-
+function openPage(p) {
   main.innerHTML = `
-    <div class="page">
-      <div class="back" onclick="location.reload()">← Назад</div>
-      <h2>${data.title}</h2>
-      <p>${data.content.text || ""}</p>
+    <h2>${p.title}</h2>
+    <p>${p.text.replace(/\n/g,"<br>")}</p>
+    ${p.image ? `<img src="${p.image}">` : ""}
+  `;
+}
+
+function showEditor() {
+  main.innerHTML = `
+    <div class="editor">
+      <h2>Новая страница</h2>
+      <input id="title" placeholder="Заголовок">
+      <textarea id="text" placeholder="Текст (Markdown-подобный)"></textarea>
+      <input type="file" id="image">
+      <button class="action" onclick="savePage()">Сохранить</button>
+      <div class="preview" id="preview"></div>
     </div>
   `;
-
-  const page = main.querySelector(".page");
-
-  if (data.content.image) {
-    const img = document.createElement("img");
-    img.src = data.content.image;
-    page.appendChild(img);
-  }
-
-  if (data.content.files) {
-    data.content.files.forEach(f => {
-      const a = document.createElement("a");
-      a.href = f.url;
-      a.textContent = f.name;
-      a.className = "download";
-      a.download = "";
-      page.appendChild(a);
-    });
-  }
+  image.onchange = previewImage;
 }
 
-loadHome();
+function previewImage(e) {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    preview.innerHTML = `<img src="${reader.result}">`;
+    preview.dataset.img = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function savePage() {
+  const p = {
+    id: Date.now(),
+    title: title.value,
+    text: text.value,
+    image: preview.dataset.img || null
+  };
+  pages.push(p);
+  localStorage.setItem("pages", JSON.stringify(pages));
+  showHome();
+}
+
+function exportJSON() {
+  const blob = new Blob([JSON.stringify(pages, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "content.json";
+  a.click();
+}
+
+showHome();
 </script>
 
 </body>
