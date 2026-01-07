@@ -5,56 +5,198 @@
 <title>Developer</title>
 
 <style>
-/* ====== STYLE ====== */
+:root {
+  --bg: #0b0d12;
+  --card: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.12);
+  --accent: #6ea8ff;
+  --text: #ffffff;
+  --muted: #9aa0aa;
+}
+
+/* ===== RESET ===== */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
 body {
   margin: 0;
   font-family: system-ui, -apple-system;
-  background: #0e0e0e;
-  color: #fff;
+  background:
+    radial-gradient(1200px 500px at 10% -10%, #1b2a4a 0%, transparent 60%),
+    radial-gradient(1000px 400px at 90% 10%, #2a1b4a 0%, transparent 60%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
 }
 
+/* ===== HEADER ===== */
 header {
-  padding: 20px;
-  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(14px);
+  background: rgba(10,10,15,0.6);
+  border-bottom: 1px solid var(--border);
 }
 
-h1 {
-  margin: 0 0 10px;
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 nav a {
-  margin-right: 14px;
-  color: #aaa;
+  margin-left: 18px;
+  color: var(--muted);
   text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
 }
 
 nav a:hover {
-  color: #fff;
+  color: var(--text);
 }
 
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.25s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== MAIN ===== */
 main {
-  padding: 20px;
-  max-width: 720px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 20px;
 }
 
-img {
+/* ===== HERO ===== */
+.hero {
+  margin-bottom: 40px;
+  animation: fadeUp 0.6s ease;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin: 0 0 10px;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 600px;
+}
+
+/* ===== GRID ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ===== CARD ===== */
+.card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.02)
+  );
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  cursor: pointer;
+  transition:
+    transform 0.25s,
+    box-shadow 0.25s,
+    border-color 0.25s;
+  animation: fadeUp 0.6s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(110,168,255,0.6);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.card h3 {
+  margin: 0 0 8px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ===== PAGE VIEW ===== */
+.page {
+  animation: fadeUp 0.5s ease;
+}
+
+.back {
+  color: var(--muted);
+  cursor: pointer;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.page h2 {
+  font-size: 32px;
+  margin-top: 0;
+}
+
+.page p {
+  line-height: 1.7;
+  color: #d7dbe3;
+}
+
+.page img {
   max-width: 100%;
-  border-radius: 8px;
-  margin-top: 15px;
+  border-radius: 14px;
+  margin: 20px 0;
+  border: 1px solid var(--border);
 }
 
 .download {
   display: inline-block;
-  margin-top: 12px;
-  color: #4da6ff;
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(110,168,255,0.15);
+  color: var(--accent);
   text-decoration: none;
+  border: 1px solid rgba(110,168,255,0.3);
 }
 
-.back {
-  color: #aaa;
-  cursor: pointer;
-  display: inline-block;
-  margin-bottom: 10px;
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
 </head>
@@ -62,52 +204,77 @@ img {
 <body>
 
 <header>
-  <h1>Developer</h1>
-  <nav id="menu"></nav>
+  <div class="header-inner">
+    <div class="logo">Developer</div>
+    <nav id="menu"></nav>
+  </div>
 </header>
 
 <main id="main">
-  <p style="color:#666">Выберите раздел</p>
+  <div class="hero">
+    <h1>Привет 👋</h1>
+    <p>
+      Я разработчик. Здесь — мои проекты, страницы и материалы.
+      Всё управляется через JSON.
+    </p>
+  </div>
+
+  <div class="grid" id="cards"></div>
 </main>
 
 <script>
-/* ====== CONFIG ====== */
 const CONTENT_FILES = [
   "about.json",
   "projects.json",
   "contact.json"
 ];
 
-/* ====== LOAD MENU ====== */
-async function loadMenu() {
-  const menu = document.getElementById("menu");
+const main = document.getElementById("main");
+const cards = document.getElementById("cards");
+const menu = document.getElementById("menu");
+
+/* ===== LOAD ===== */
+async function loadHome() {
+  cards.innerHTML = "";
 
   for (const file of CONTENT_FILES) {
     const data = await fetch("content/" + file).then(r => r.json());
 
-    const a = document.createElement("a");
-    a.textContent = data.title;
-    a.onclick = () => openPage(file);
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <h3>${data.title}</h3>
+      <p>${data.content.text?.slice(0, 80) || ""}</p>
+    `;
+    card.onclick = () => openPage(file);
 
-    menu.appendChild(a);
+    cards.appendChild(card);
+
+    const link = document.createElement("a");
+    link.textContent = data.title;
+    link.onclick = () => openPage(file);
+    menu.appendChild(link);
   }
 }
 
-/* ====== OPEN PAGE ====== */
+/* ===== OPEN PAGE ===== */
 async function openPage(file) {
   const data = await fetch("content/" + file).then(r => r.json());
-  const main = document.getElementById("main");
 
   main.innerHTML = `
-    <div class="back" onclick="goHome()">← Назад</div>
-    <h2>${data.title}</h2>
-    <p>${data.content.text || ""}</p>
+    <div class="page">
+      <div class="back" onclick="location.reload()">← Назад</div>
+      <h2>${data.title}</h2>
+      <p>${data.content.text || ""}</p>
+    </div>
   `;
+
+  const page = main.querySelector(".page");
 
   if (data.content.image) {
     const img = document.createElement("img");
     img.src = data.content.image;
-    main.appendChild(img);
+    page.appendChild(img);
   }
 
   if (data.content.files) {
@@ -117,17 +284,12 @@ async function openPage(file) {
       a.textContent = f.name;
       a.className = "download";
       a.download = "";
-      main.appendChild(a);
+      page.appendChild(a);
     });
   }
 }
 
-/* ====== HOME ====== */
-function goHome() {
-  location.reload();
-}
-
-loadMenu();
+loadHome();
 </script>
 
 </body>
