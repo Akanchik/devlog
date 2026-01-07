@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Создать страницу</title>
+
+<style>
+body {
+  font-family: system-ui;
+  background: #0e0e0e;
+  color: #fff;
+  padding: 20px;
+}
+
+input, textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #161616;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
+
+button {
+  padding: 10px 16px;
+  background: #4da6ff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+pre {
+  background: #111;
+  padding: 10px;
+  border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Создание страницы</h2>
+
+<input id="id" placeholder="ID (about)">
+<input id="title" placeholder="Заголовок">
+<textarea id="text" placeholder="Текст"></textarea>
+<input id="image" placeholder="Путь к изображению (опц.)">
+<input id="fileName" placeholder="Имя файла (опц.)">
+<input id="fileUrl" placeholder="Путь к файлу (опц.)">
+
+<button onclick="generate()">Сгенерировать JSON</button>
+
+<pre id="out"></pre>
+
+<script>
+function generate() {
+  const json = {
+    id: id.value,
+    title: title.value,
+    type: "page",
+    content: {
+      text: text.value,
+      image: image.value || null,
+      files: fileUrl.value
+        ? [{ name: fileName.value || "Скачать", url: fileUrl.value }]
+        : []
+    }
+  };
+
+  out.textContent = JSON.stringify(json, null, 2);
+}
+</script>
+
+</body>
+</html>
